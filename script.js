@@ -88,11 +88,11 @@ function saveChoice() {
     let radioButtons = document.getElementsByName(
       "question" + currentQuestionIndex
     );
-    for (let i = 0; i < radioButtons.length; i++) {
-      if (radioButtons[i].value === selectedValue) {
-        radioButtons[i].checked = true;
+    radioButtons.forEach((radioButton) => {
+      if (radioButton.value === selectedValue) {
+        radioButton.checked = true;
       }
-    }
+    });
   }
 }
 
