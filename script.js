@@ -44,39 +44,47 @@ console.log(responses);
 
 function displayQuiz() {
   displayQuestion.innerHTML = quiz[currentQuestionIndex].question;
+  displayOptions.innerHTML = "";
 
-  for (let j = 0; j < quiz[currentQuestionIndex].options.length; j++) {
-    let option = document.createElement("input");
-    option.type = "radio";
-    option.name = "question" + currentQuestionIndex;
-    option.value = quiz[currentQuestionIndex].options[j];
-    option.onclick = function () {
+  quiz[currentQuestionIndex].options.forEach((option) => {
+    let radioButton = document.createElement("input");
+    radioButton.type = "radio";
+    radioButton.name = "question" + currentQuestionIndex;
+    radioButton.value = option;
+    radioButton.onclick = function () {
       quiz[currentQuestionIndex].selected = this.value;
       responses[currentQuestionIndex] = this.value;
     };
 
     let label = document.createElement("label");
-    label.innerHTML = quiz[currentQuestionIndex].options[j];
+    label.innerHTML = option;
 
     let br = document.createElement("br");
 
-    displayOptions.appendChild(option);
+    displayOptions.appendChild(radioButton);
     displayOptions.appendChild(label);
     displayOptions.appendChild(br);
-  }
+  });
 
-  if (currentQuestionIndex === 0) {
-    prevButton.style.display = "none";
-  } else {
-    prevButton.style.display = "block";
-  }
+  prevButton.style.display =
+    currentQuestionIndex === 0 ? "none" : "inline-block";
+  nextButton.style.display =
+    currentQuestionIndex === quiz.length - 1 ? "none" : "inline-block";
+  submitButton.style.display =
+    currentQuestionIndex === quiz.length - 1 ? "inline-block" : "none";
+}
 
-  if (currentQuestionIndex === quiz.length - 1) {
-    nextButton.style.display = "none";
-    submitButton.style.display = "block";
-  } else {
-    nextButton.style.display = "block";
-    submitButton.style.display = "none";
+function saveChoice() {
+  let selectedValue = quiz[currentQuestionIndex].selected;
+  if (selectedValue !== null) {
+    let radioButtons = document.getElementsByName(
+      "question" + currentQuestionIndex
+    );
+    for (let i = 0; i < radioButtons.length; i++) {
+      if (radioButtons[i].value === selectedValue) {
+        radioButtons[i].checked = true;
+      }
+    }
   }
 }
 
@@ -84,47 +92,23 @@ function prevQuestion() {
   displayOptions.innerHTML = "";
   currentQuestionIndex--;
   displayQuiz();
-
-  let selectedValue = quiz[currentQuestionIndex].selected;
-  if (selectedValue !== null) {
-    let radioButtons = document.getElementsByName(
-      "question" + currentQuestionIndex
-    );
-    for (let i = 0; i < radioButtons.length; i++) {
-      if (radioButtons[i].value === selectedValue) {
-        radioButtons[i].checked = true;
-      }
-    }
-  }
+  saveChoice();
 }
 
 function nextQuestion() {
   displayOptions.innerHTML = "";
   currentQuestionIndex++;
   displayQuiz();
-
-  let selectedValue = quiz[currentQuestionIndex].selected;
-  if (selectedValue !== null) {
-    let radioButtons = document.getElementsByName(
-      "question" + currentQuestionIndex
-    );
-    for (let i = 0; i < radioButtons.length; i++) {
-      if (radioButtons[i].value === selectedValue) {
-        radioButtons[i].checked = true;
-      }
-    }
-  }
+  saveChoice();
 }
 
 function submitQuiz() {
   let score = 0;
-  
   for (let i = 0; i < responses.length; i++) {
     if (responses[i] === quiz[i].answer) {
       score++;
     }
   }
-
   alert("You scored " + score + " out of " + quiz.length);
 }
 
