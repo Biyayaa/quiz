@@ -28,7 +28,7 @@ body {
     margin-bottom: 10px;
   }
   
-  .btns {
+  #btns {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -47,6 +47,14 @@ body {
   
   button:hover {
     background-color: #3e8e41;
+  }
+
+  #submitButton{
+    background-color: rgba(0, 0, 255, 0.842);
+  }
+
+  #submitButton:hover{
+    background-color: blue;
   }
   
   input[type="radio"] {

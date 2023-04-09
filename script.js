@@ -8,6 +8,7 @@ let modal = document.getElementById("modal");
 let modalText = document.getElementById("modal-text");
 let modalYes = document.getElementById("modal-yes");
 let modalNo = document.getElementById("modal-no");
+let btns = document.getElementById("btns");
 
 let quiz = [
   {
@@ -79,6 +80,8 @@ function displayQuiz() {
     currentQuestionIndex === quiz.length - 1 ? "inline-block" : "none";
 }
 
+displayQuiz();
+
 function saveChoice() {
   let selectedValue = quiz[currentQuestionIndex].selected;
   if (selectedValue !== null) {
@@ -129,12 +132,22 @@ modalYes.onclick = function () {
       score++;
     }
   });
-  alert("You scored " + score + " out of " + quiz.length);
   hideModal();
+  displayOptions.style.display = "none";
+  btns.style.display = "none";
+  let passPercentage = 0.7;
+  let passScore = Math.floor(quiz.length * passPercentage);
+  if (score >= passScore) {
+    displayQuestion.innerHTML = "Congratulations! You passed the quiz with a score of " + score + " out of " + quiz.length + "👍";
+    displayQuestion.style.color = "green";
+  } else {
+    displayQuestion.innerHTML = "Sorry, you failed the quiz with a score of " + score + " out of " + quiz.length + "👎";
+    displayQuestion.style.color = "red";
+  }
 };
 
 modalNo.onclick = function () {
   hideModal();
 };
 
-displayQuiz();
+
