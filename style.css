@@ -116,3 +116,13 @@ body {
   #modal-no:hover {
     background-color: #d32f2f;
   }
+
+  #gif{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    display: none;
+  }

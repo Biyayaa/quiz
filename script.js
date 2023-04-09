@@ -6,9 +6,9 @@ let submitButton = document.getElementById("submitButton");
 
 let modal = document.getElementById("modal");
 let modalText = document.getElementById("modal-text");
-let modalYes = document.getElementById("modal-yes");
-let modalNo = document.getElementById("modal-no");
 let btns = document.getElementById("btns");
+
+let gif = document.getElementById("gif");
 
 let quiz = [
   {
@@ -125,7 +125,7 @@ function submitQuiz() {
   showModal();
 }
 
-modalYes.onclick = function () {
+function modalYes(){
   let score = 0;
   responses.forEach((response, index) => {
     if (response === quiz[index].answer) {
@@ -137,7 +137,13 @@ modalYes.onclick = function () {
   btns.style.display = "none";
   let passPercentage = 0.7;
   let passScore = Math.floor(quiz.length * passPercentage);
-  if (score >= passScore) {
+
+  if (score == quiz.length) {
+    displayQuestion.innerHTML = "Congratulations! You passed the quiz with a perfect score of " + score + " out of " + quiz.length + "🙌";
+    displayQuestion.style.color = "green";
+    gif.style.display = "block";
+  }
+  else if (score >= passScore) {
     displayQuestion.innerHTML = "Congratulations! You passed the quiz with a score of " + score + " out of " + quiz.length + "👍";
     displayQuestion.style.color = "green";
   } else {
@@ -146,7 +152,7 @@ modalYes.onclick = function () {
   }
 };
 
-modalNo.onclick = function () {
+function modalNo() {
   hideModal();
 };
 
