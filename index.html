@@ -9,24 +9,34 @@
 </head>
 <body>
     <main>
-        <h1>Quiz</h1>
 
-        <div id="quiz-container">
-            <h2 id="displayQuestion"></h2>
-            <div id="displayOptions"></div>
-        </div>
+        <div class="body">
+
+            <h1>Quiz</h1>
     
-        <button id="prevButton" onclick="prevQuestion()" style="display:none">Previous</button>
-        <button id="nextButton" onclick="nextQuestion()">Next</button>
-        <button id="submitButton" onclick="submitQuiz()" style="display:none">Submit</button>
-
-
-        <div id="modal" class="modal">
-            <div class="modal-content">
-              <p id="modal-text"></p>
-              <button id="modal-yes">Yes</button>
-              <button id="modal-no">No</button>
+            <div id="quiz-container">
+                <h2 id="displayQuestion"></h2>
+                <div id="displayOptions"></div>
             </div>
+
+
+            <div class="btns">
+                <button id="prevButton" onclick="prevQuestion()">Previous</button>
+                <button id="nextButton" onclick="nextQuestion()">Next</button>
+                <button id="submitButton" onclick="submitQuiz()">Submit</button>
+            </div>
+        
+    
+    
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                  <p id="modal-text"></p>
+                  <button id="modal-yes">Yes</button>
+                  <button id="modal-no">No</button>
+                </div>
+            </div>
+
+
         </div>
     
     </main>
