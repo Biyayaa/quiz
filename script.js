@@ -46,7 +46,7 @@ let quiz = [
 let currentQuestionIndex = 0;
 
 let responses = [];
-console.log(responses);
+
 
 function displayQuiz() {
   displayQuestion.innerHTML = currentQuestionIndex +1 +"."+ quiz[currentQuestionIndex].question;
@@ -60,6 +60,7 @@ function displayQuiz() {
     radioButton.onclick = function () {
       quiz[currentQuestionIndex].selected = this.value;
       responses[currentQuestionIndex] = this.value;
+      console.log(responses);
     };
 
     let label = document.createElement("label");
@@ -129,7 +130,7 @@ function modalYes(){
   let score = 0;
   responses.forEach((response, index) => {
     if (response === quiz[index].answer) {
-      score++;
+      score ++;
     }
   });
   hideModal();
